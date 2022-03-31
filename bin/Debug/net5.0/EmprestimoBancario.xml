@@ -1,0 +1,154 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>EmprestimoBancario</name>
+    </assembly>
+    <members>
+        <member name="M:EmprestimoBancario.Controllers.EmprestimoController.Criar(EmprestimoBancario.Models.Emprestimo)">
+            <summary>
+            Cria um empréstimo.
+            </summary>
+            <remarks>
+            Sample request:
+            
+                POST api/emprestimo
+                {
+                 "quantia" : 500,
+                 "linhaDeCreditoId" : 1
+                }
+            </remarks>
+            <param name="emprestimo"></param>
+            <returns>O ID do empréstimo criado</returns>
+            <response code="201">Retorna o ID do empréstimo criado</response>
+            <response code="400">Retorna em caso de erros de validação</response>   
+        </member>
+        <member name="M:EmprestimoBancario.Controllers.EmprestimoController.Listar">
+            <summary>
+            Lista todos os empréstimos.
+            </summary>
+            <returns>Todos os empréstimos.</returns>
+            <response code="200">Retorna todos os empréstimos</response>
+            <response code="400">Retorna em caso de erros de validação</response>   
+            GET: api/emprestimo
+        </member>
+        <member name="M:EmprestimoBancario.Controllers.EmprestimoController.ListarPorId(System.Int32)">
+            <summary>
+            Lista um empréstimo por ID.
+            </summary>
+            <returns>Retorna um empréstimo identificado pelo ID.</returns>
+            <response code="200">Retorna um empréstimo</response>
+            <response code="400">Retorna em caso de erros de validação</response>   
+            GET: api/emprestimo
+        </member>
+        <member name="M:EmprestimoBancario.Controllers.EmprestimoController.Aprovar(System.Int32,EmprestimoBancario.Controllers.AprovarEmprestimoModel)">
+            <summary>
+            Solicita ao Banco a aprovação de um empréstimo.
+            </summary>
+            <remarks>
+            Sample request:
+            
+                PUT api/emprestimo
+                {
+                 "InvestidorId" : 2,
+                 "Porcentagem" : 30,
+                 "confirma" : "S"
+                }
+            </remarks>
+            <param name="model"></param>
+            <param name="id"></param>
+            <returns>Vazio</returns>
+            <response code="204">Sem conteudo de resposta</response>
+            <response code="400">Retorna em caso de erros de validação</response> 
+        </member>
+        <member name="M:EmprestimoBancario.Controllers.EmprestimoController.VerificaStatus(System.Int32)">
+            <summary>
+            Verifica o status de aprovação dos Bancos e realiza a aprovação do empréstimo.
+            </summary>
+            <returns>Empréstimo Aprovado/Negado/Pendente.</returns>
+            <param name="id"></param>
+            <response code="200">Retorna mensagem Empréstimo Aprovado/Negado/Pendente.</response>
+            <response code="400">Retorna em caso de erros de validação</response>  
+            GET: api/emprestimo
+        </member>
+        <member name="M:EmprestimoBancario.Controllers.EmprestimoController.Aumentar(System.Int32,EmprestimoBancario.Controllers.PagarEmprestimoModel)">
+            <summary>
+            Aumenta o valor de um empréstimo.
+            </summary>
+            <remarks>
+            Sample request:
+            
+                PUT api/emprestimo
+                {
+                 "quantia" : 100,
+                 "taxa" : 2.75
+                }
+            </remarks> 
+            <param name="model"></param>
+            <param name="id"></param>
+            <returns>Vazio</returns>
+            <response code="204">Sem conteudo de resposta</response>
+            <response code="400">Retorna em caso de erros de validação</response> 
+        </member>
+        <member name="M:EmprestimoBancario.Controllers.EmprestimoController.Diminuir(System.Int32,EmprestimoBancario.Controllers.PagarEmprestimoModel)">
+            <summary>
+            Realiza o pagamento de um empréstimo.
+            </summary>
+            <remarks>
+            Sample request:
+            
+                PUT api/emprestimo
+                {
+                 "quantia" : 500,
+                 "taxa" : 10.75
+                }
+            </remarks>
+            <param name="model"></param>
+            <param name="id"></param>
+            <returns>Vazio</returns>
+            <response code="204">Sem conteudo de resposta</response>
+            <response code="400">Retorna em caso de erros de validação</response> 
+        </member>
+        <member name="M:EmprestimoBancario.Controllers.LinhaDeCreditoController.Criar(EmprestimoBancario.Models.LinhaDeCredito)">
+            <summary>
+            Cria uma linha de crédito.
+            </summary>
+            <remarks>
+            Sample request:
+            
+                POST api/linha-de-credito
+                {
+                 "Limite" : 1000,
+                 "EmpresaId" : 1,
+                 "Investimentos" : [
+            			{"InvestidorId":1, "Porcentagem":25},
+            			{"InvestidorId":2, "Porcentagem":25},
+            			{"InvestidorId":3, "Porcentagem":25},
+            			{"InvestidorId":4, "Porcentagem":25}
+            	    ]  
+                }
+            </remarks> 
+            <param name="linhaDeCredito"></param>
+            <returns>O ID de uma linha de crédito criada</returns>
+            <response code="201">Retorna o ID de uma linha de crédito criada</response>
+            <response code="400">Retorna em caso de erros de validação</response>  
+        </member>
+        <member name="M:EmprestimoBancario.Controllers.LinhaDeCreditoController.Listar">
+            <summary>
+            Lista todas as linhas de crédito.
+            </summary>
+            <returns>Lista de linhas de crédito.</returns>
+            GET: api/linha-de-credito
+            <response code="200">Retorna todas as linhas de crédito</response>
+            <response code="400">Retorna em caso de erros de validação</response>
+        </member>
+        <member name="M:EmprestimoBancario.Controllers.LinhaDeCreditoController.ListarPorId(System.Int32)">
+            <summary>
+            Lista uma linhas de crédito por Id.
+            </summary>
+            <returns>Lista de linhas de crédito.</returns>
+            GET: api/linha-de-credito
+            <response code="200">Retorna uma linha de crédito</response>
+            <response code="400">Retorna em caso de erros de validação</response>
+        </member>
+    </members>
+</doc>
